@@ -124,7 +124,6 @@ def two_stage_regression(raw_data,
     F_Proj = RFF_Projection(kernel_width_F, seed*3, nRFF_F, F_rff.shape[0])
     F_rff = F_Proj.project(F_rff)
     FS_rff = F_Proj.project(FS_rff)
-        
     
     # project the data onto top few singular vectors
     print('project onto svd')

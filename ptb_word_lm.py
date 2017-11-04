@@ -37,11 +37,11 @@ class Config(object):
   dim_Obs = 20
   dim_P = 20
   dim_F = 20
-  reg_rate = 1*10**-3 #27836
+  reg_rate = 1*10**-3
   obs_window = 5
-  kernel_width_Obs = 2#2
-  kernel_width_P = 0.2#2/obs_window#2
-  kernel_width_F = 0.2#2/obs_window#2
+  kernel_width_Obs = 2
+  kernel_width_P = 0.2
+  kernel_width_F = 0.2
     
   # BPTT parameters
   init_scale = 0.0
@@ -49,8 +49,7 @@ class Config(object):
   max_grad_norm = 0.25
   num_layers = 1
   num_steps = 20
-  max_epoch = 4
-  max_max_epoch = 50
+  max_epoch = 10
   keep_prob = 1.0
   lr_decay = 1.0
   batch_size = 20
@@ -326,7 +325,7 @@ def main(_):
       valid_bpc_all.append(valid_bpc)
       valid_acc_all.append(valid_acc)
       
-      for i in range(config.max_max_epoch):
+      for i in range(config.max_epoch):
         m.assign_lr(session, config.learning_rate * config.lr_decay)
 
         print("Epoch: %d Learning rate: %.3f" % (i + 1, session.run(m.lr)))
@@ -342,7 +341,7 @@ def main(_):
         valid_bpc_all.append(valid_bpc)
         valid_acc_all.append(valid_acc)
 
-      test_perplexity, test_bpc, test_acc, _, _, _ = run_epoch(session, mtest, save_params=True)
+      test_perplexity, test_bpc, test_acc = run_epoch(session, mtest, save_params=True)
       print("Test Perplexity: %.3f Test BPC: %.3f Test Accuracy: %.3f" % (test_perplexity, test_bpc, test_acc))
       
       print("validation perplexity\n",valid_perplexity_all)
