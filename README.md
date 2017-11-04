@@ -5,5 +5,5 @@ This repository contains code for the paper: C. Downey, A. Hefny, B. Boots, B. L
 To run use
 
 ```
-python ptb_word_lm.py --data_path=pdb_data/
+python ptb_word_lm.py --data_path=ptb_data/
 ```
